@@ -1,0 +1,92 @@
+﻿<Window x:Class="Lab2_EnemyEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab2_EnemyEditor"
+        mc:Ignorable="d"
+        Title="Enemy Editor" Height="600" Width="1000">
+    <Grid Margin="8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <!-- левый столбец: список -->
+            <ColumnDefinition Width="*"/>
+            <!-- центр: превью и поля -->
+            <ColumnDefinition Width="300"/>
+            <!-- правый: галерея иконок -->
+        </Grid.ColumnDefinitions>
+
+        <!-- ЛЕВЫЙ СТОЛБЕЦ: список врагов и Save/Load -->
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="List of enemies:" FontWeight="Bold" Margin="4"/>
+            <ListBox Name="enemyListBox" Height="420" Margin="4" SelectionChanged="EnemyListBox_SelectionChanged"/>
+
+            <!-- Кнопки Save и Load -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="4">
+                <Button Name="btnSave" Content="Save" Width="90" Click="BtnSave_Click" Margin="4"/>
+                <Button Name="btnLoad" Content="Load" Width="90" Click="BtnLoad_Click" Margin="4"/>
+            </StackPanel>
+
+            <!-- Кнопка запуска игры — под Save/Load -->
+            <Button Name="btnRunGame" Content="Запустить игру" Width="200"
+                    Height="40" Margin="8,16,8,0" Click="BtnRunGame_Click"
+                    Background="#FFCCE5FF" FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- ЦЕНТРАЛЬНЫЙ СТОЛБЕЦ: превью и поля -->
+        <Grid Grid.Column="1" Margin="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Превью и метки слева -->
+            <StackPanel Grid.Column="0" Margin="6">
+                <TextBlock Text="Enemy icon:" FontWeight="Bold" />
+                <Border BorderBrush="Black" BorderThickness="1" Width="128" Height="128" HorizontalAlignment="Left" Margin="0,6">
+                    <Image Name="previewImage" Stretch="Uniform"/>
+                </Border>
+
+                <TextBlock Text="Icon name:" FontWeight="Bold" Margin="0,8,0,0"/>
+                <TextBox Name="txtIconName" IsReadOnly="True" Width="180" Margin="0,4"/>
+
+                <TextBlock Text="Enemy Name:" FontWeight="Bold" Margin="0,8,0,0"/>
+                <TextBox Name="txtEnemyName" Width="180" Margin="0,4"/>
+            </StackPanel>
+
+            <!-- Параметры справа -->
+            <StackPanel Grid.Column="1" Margin="12">
+                <WrapPanel>
+                    <StackPanel Width="200" Margin="0,0,10,0">
+                        <TextBlock Text="Base life:" FontWeight="Bold"/>
+                        <TextBox Name="txtBaseLife" Width="160" Margin="0,4"/>
+                        <TextBlock Text="Life modifier:" FontWeight="Bold" Margin="0,8,0,0"/>
+                        <TextBox Name="txtLifeModifier" Width="160" Margin="0,4"/>
+                        <TextBlock Text="Spawn chance (1-100):" FontWeight="Bold" Margin="0,8,0,0"/>
+                        <TextBox Name="txtSpawnChance" Width="160" Margin="0,4"/>
+                    </StackPanel>
+
+                    <StackPanel Width="200">
+                        <TextBlock Text="Base gold:" FontWeight="Bold"/>
+                        <TextBox Name="txtBaseGold" Width="160" Margin="0,4"/>
+                        <TextBlock Text="Gold modifier:" FontWeight="Bold" Margin="0,8,0,0"/>
+                        <TextBox Name="txtGoldModifier" Width="160" Margin="0,4"/>
+                    </StackPanel>
+                </WrapPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                    <Button Name="btnAdd" Content="Add" Width="120" Click="BtnAdd_Click" Margin="4"/>
+                    <Button Name="btnRemove" Content="Remove" Width="120" Click="BtnRemove_Click" Margin="4"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!-- ПРАВЫЙ СТОЛБЕЦ: галерея иконок (wrap) -->
+        <StackPanel Grid.Column="2" Margin="6">
+            <TextBlock Text="Icons:" FontWeight="Bold" Margin="4"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <WrapPanel Name="iconsWrapPanel" Margin="4" />
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</Window>
